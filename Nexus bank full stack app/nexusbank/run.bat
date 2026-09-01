@@ -64,6 +64,16 @@ echo   API Gateway:         http://localhost:8080
 echo   Customer Service:    http://localhost:8081
 echo   Admin Service:       http://localhost:8082
 echo   Frontend:            http://localhost:3000
+echo   H2 Console for Customer Service: http://localhost:8081/h2-console
+echo   JDBC URL: jdbc:h2:mem:nexusbank_customer
+echo   H2 Console for Admin Service:    http://localhost:8082/h2-console
+echo   JDBC URL: jdbc:h2:mem:nexusbank_admin
+echo =========================================
+echo Credentials:
+echo   Admin Service:       admin / admin123
+echo   Customer Service:    johndoe / password123
+echo   Eureka Server:        admin / admin123
+echo =========================================
 echo.
 echo   To stop: docker-compose -f devops/docker/docker-compose.yml down
 echo.

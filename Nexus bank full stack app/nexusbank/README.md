@@ -3,7 +3,7 @@
 ## 🚀 Quick Start (Recommended: Docker)
 
 ### Prerequisites
-- **Java 21** (JDK)
+- **Java 17** (JDK)
 - **Maven 3.9+**
 - **Docker** & **Docker Compose**
 - **Node.js 18+** (for frontend only)
