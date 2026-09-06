@@ -259,6 +259,33 @@ netstat -ano | findstr :8080    # Windows
 ./run.sh build
 ```
 
+## How to access the databases (examples)
+
+### Using Docker + mysql CLI (recommended for quick access):
+```
+Connect as root:
+docker exec -it nexusbank-mysql mysql -u root -p
+(enter rootpass)
+Or connect as nexususer to a specific DB:
+docker exec -it nexusbank-mysql mysql -u nexususer -p nexusbank_customer
+(enter nexuspass)
+Using a GUI (MySQL Workbench / DBeaver / HeidiSQL):
+New connection:
+Host: 127.0.0.1 (or localhost)
+Port: 3306
+User: nexususer
+Password: nexuspass
+Default DB: nexusbank_customer or nexusbank_admin
+```
+
+### Mysql container Root Creds:
+- Username: root
+- Password: rootpass
+
+### Mysql container User Creds:
+- Username: nexususer
+- Password: nexuspass
+
 ---
 
 ## 📊 Architecture Overview
@@ -286,9 +313,9 @@ netstat -ano | findstr :8080    # Windows
 
 ## 📚 Tech Stack
 
-- **Backend**: Java 21, Spring Boot 3.2, Spring Security, JWT, Spring Data JPA
+- **Backend**: Java 17, Spring Boot 3.2, Spring Security, JWT, Spring Data JPA
 - **Frontend**: React 18, React Router, Axios, Bootstrap 5
-- **Database**: H2 In-Memory (per service)
+- **Database**: SQL container on docker
 - **Infrastructure**: Eureka, Config Server, API Gateway
 - **Resilience**: Resilience4j Circuit Breaker
 - **Communication**: OpenFeign (Admin → Customer)

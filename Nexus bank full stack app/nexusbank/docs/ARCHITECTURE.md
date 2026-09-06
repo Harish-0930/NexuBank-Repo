@@ -48,7 +48,3 @@ NexusBank is a microservices-based online banking system built with Spring Boot 
 5. Gateway validates JWT before routing
 6. Services check role-based access
 
-## Database Design
-Each service has its own H2 in-memory database:
-- Customer Service: customers, accounts, transactions, loans, addresses
-- Admin Service: admins

@@ -29,6 +29,23 @@ services:
     deploy:
       replicas: 1
 
+  mysql:
+    image: mysql:8.0
+    container_name: nexusbank-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: nexusbank_customer
+      MYSQL_USER: nexususer
+      MYSQL_PASSWORD: nexuspass
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - mysql-data:/var/lib/mysql
+    networks:
+      - nexusbank-network
+
   api-gateway:
     image: nexusbank/api-gateway:latest
     ports:
@@ -48,8 +65,12 @@ services:
       - "8081:8081"
     depends_on:
       - config-server
+      - mysql
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://admin:${EUREKA_PASSWORD}@eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/nexusbank_customer?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=nexususer
+      - SPRING_DATASOURCE_PASSWORD=nexuspass
     networks:
       - nexusbank-network
     deploy:
@@ -61,8 +82,12 @@ services:
       - "8082:8082"
     depends_on:
       - customer-service
+      - mysql
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://admin:${EUREKA_PASSWORD}@eureka-server:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/nexusbank_admin?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=nexususer
+      - SPRING_DATASOURCE_PASSWORD=nexuspass
     networks:
       - nexusbank-network
     deploy:
@@ -78,6 +103,9 @@ services:
       - nexusbank-network
     deploy:
       replicas: 2
+
+volumes:
+  mysql-data:
 
 networks:
   nexusbank-network:
