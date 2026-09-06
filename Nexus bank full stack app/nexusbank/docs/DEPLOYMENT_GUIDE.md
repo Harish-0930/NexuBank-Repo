@@ -3,7 +3,7 @@
 ## Local Development
 
 ### Prerequisites
-- Java 21 JDK
+- Java 17 JDK
 - Maven 3.9+
 - Docker & Docker Compose
 - Node.js 18+ (for frontend)
@@ -45,4 +45,3 @@ kubectl get pods -n nexusbank
 ## Monitoring
 - Eureka Dashboard: http://localhost:8761
 - Actuator endpoints: /actuator/health, /actuator/metrics
-- H2 Console: http://localhost:8081/h2-console
