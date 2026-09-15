@@ -1,4 +1,4 @@
-Yes — that confirms the frontend project and Dockerfile are working correctly. The issue is local to Docker Desktop / Windows on this laptop, not your application.
+ Yes — that confirms the frontend project and Dockerfile are working correctly. The issue is local to Docker Desktop / Windows on this laptop, not your application.
 
 The `grpc server closed unexpectedly` error happens inside Docker Desktop’s BuildKit service before the frontend build even starts. Since the same build succeeds on fresh Ubuntu, check these local items:
 
